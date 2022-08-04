@@ -4,6 +4,8 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { ROUTE_USER_ROOT } from './routes/routes';
+import userRouter from './routes/userRouter';
 
 dotenv.config();
 
@@ -22,9 +24,7 @@ app.use(json());
 
 const PORT = process.env.PORT || 8000;
 
-app.get('/', (req, res) => {
-  res.send('Well done!');
-});
+app.use(ROUTE_USER_ROOT, userRouter);
 
 app.listen(PORT, () => {
   console.log(`The application is listening on port ${PORT}!`);

@@ -1,5 +1,7 @@
 function userService() {
-  async function createUser() {}
+  async function createUser() {
+    console.log('userService');
+  }
 
   return { createUser };
 }
