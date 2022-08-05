@@ -5,7 +5,11 @@ function userRepository() {
     return userModel.create(user);
   }
 
-  return { createUser };
+  async function findUserByEmail(email:string) {
+    return userModel.findOne({ email });
+  }
+
+  return { createUser, findUserByEmail };
 }
 
 export default userRepository();

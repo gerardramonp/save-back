@@ -24,6 +24,7 @@ function userController() {
       }
 
       const user = await userService.createUser(req.body);
+
       return handleResponseSuccess(res, user);
     } catch (error) {
       return handleResponseError(res, error);
