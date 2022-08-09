@@ -7,3 +7,4 @@ export const ERROR_PASSWORDS_NOT_MATCH = 'The password and repeated password doe
 export const ERROR_USER_ALREADY_EXIST = 'A user with that email already exists';
 export const ERROR_MISSING_PARAMS = (param:string) => `Missing param: <${param}>`;
 export const ERROR_MISSING_MODEL_ID_NOT_FOUND = (model:string, id:ObjectId) => `There is no ${model} with an id <${id}>`;
+export const ERROR_USER_WRONG_CREDENTIALS = 'There is no user with that credentials';

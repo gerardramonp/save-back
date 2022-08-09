@@ -8,7 +8,7 @@ function userRepository() {
   }
 
   async function findUserByEmail(email:string) {
-    return userModel.findOne({ email });
+    return userModel.findOne({ email }).populate('salary');
   }
 
   async function deleteUser(id:ObjectId) {
