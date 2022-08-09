@@ -1,7 +1,8 @@
-import userModel, { IUser } from '../models/userModel';
+import { User } from '../controllers/userController';
+import userModel from '../models/userModel';
 
 function userRepository() {
-  async function createUser(user: IUser) {
+  async function createUser(user: User) {
     return userModel.create(user);
   }
 

@@ -8,6 +8,11 @@ export interface IUser extends mongoose.Document {
   categories?: ObjectId[];
 }
 
-const userModel = new Schema<IUser>({});
+const userModel = new Schema<IUser>({
+  email: { type: String },
+  password: { type: String },
+  salary: { type: Schema.Types.ObjectId, ref: 'Salary' },
+  categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }]
+});
 
 export default model<IUser>('Users', userModel);

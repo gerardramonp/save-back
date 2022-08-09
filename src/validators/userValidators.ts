@@ -1,9 +1,9 @@
-import { ERROR_MISSING_REQUIRED_PROPERTIES } from '../constants/errorMessages';
+import { ERROR_MISSING_REQUIRED_PROPERTIES, ERROR_PASSWORDS_NOT_MATCH } from '../constants/errorMessages';
 import { STATUS_BAD_REQUEST } from '../constants/statusCodes';
-import { ICreateUserRequest } from '../controllers/userController';
+import { CreateUserRequest } from '../controllers/userController';
 import CustomError from '../utils/CustomError';
 
-export default function isUserRequestValid(user: ICreateUserRequest) {
+export default function isUserRequestValid(user: CreateUserRequest) {
   const requiredProps = ['email', 'password', 'repeatedPassword'];
 
   const recievedProps = Object.keys(user);
@@ -13,6 +13,10 @@ export default function isUserRequestValid(user: ICreateUserRequest) {
       throw new CustomError(STATUS_BAD_REQUEST, ERROR_MISSING_REQUIRED_PROPERTIES);
     }
   });
+
+  if (user.password !== user.repeatedPassword) {
+    throw new CustomError(STATUS_BAD_REQUEST, ERROR_PASSWORDS_NOT_MATCH);
+  }
 
   return true;
 }
