@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { ERROR_MISSING_REQUIRED_PROPERTIES, ERROR_USER_ALREADY_EXIST } from '../constants/errorMessages';
+import { ObjectId } from 'mongoose';
+import { ERROR_MISSING_PARAMS, ERROR_MISSING_REQUIRED_PROPERTIES, ERROR_USER_ALREADY_EXIST } from '../constants/errorMessages';
 import { STATUS_BAD_REQUEST, STATUS_OK } from '../constants/statusCodes';
 import userRepository from '../repositories/userRepository';
 import userService from '../services/userService';
@@ -42,7 +43,26 @@ function userController() {
     }
   }
 
-  return { createUser };
+  async function deleteUserById(
+    req: Request<{id:ObjectId}>,
+    res: Response
+  ) {
+    try {
+      const { id } = req.params;
+
+      if (!id) {
+        throw new CustomError(STATUS_BAD_REQUEST, ERROR_MISSING_PARAMS('id'));
+      }
+
+      const deletedUser = await userService.deleteUser(id);
+
+      handleResponseSuccess(res, deletedUser);
+    } catch (error) {
+      handleResponseError(res, error);
+    }
+  }
+
+  return { createUser, deleteUserById };
 }
 
 export default userController();

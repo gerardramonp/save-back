@@ -1,5 +1,5 @@
-import { Response } from "express";
-import { STATUS_OK } from "../constants/statusCodes";
+import { Response } from 'express';
+import { STATUS_OK } from '../constants/statusCodes';
 
 const handleResponseSuccess = (
   res: Response,
